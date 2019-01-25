@@ -291,57 +291,35 @@
           ]
         },
         {
-          "match": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n@\n(?: # Ordering not important as we everything will be matched up to word boundary\n (?i)append\n|(?i)auth\n|(?i)break\n|(?i)continue\n|(?i)default\n|(?i)else\n|(?i)empty\n|(?i)endauth\n|(?i)endcan\n|(?i)endcannot\n|(?i)endcomponent\n|(?i)endempty\n|(?i)endfor\n|(?i)endforeach\n|(?i)endforelse\n|(?i)endguest\n|(?i)endif\n|(?i)endisset\n|(?i)endlang\n|(?i)endprepend\n|(?i)endpush\n|(?i)endsection\n|(?i)endslot\n|(?i)endswitch\n|(?i)endunless\n|endverbatim\n|(?i)endwhile\n|(?i)guest\n|(?i)lang\n|(?i)overwrite\n|(?i)parent\n|(?i)show\n|(?i)stop\n|(?i)endtask\n|(?i)endstory\n|(?i)finished\n|(?i)endfinished\n|verbatim\n|csrf\n)\n\\b",
+          "match": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n@\n(?: # Ordering not important as we everything will be matched up to word boundary\n (?i)append\n|(?i)auth\n|(?i)break\n|(?i)continue\n|(?i)default\n|(?i)else\n|(?i)empty\n|(?i)endauth\n|(?i)endcan\n|(?i)endcannot\n|(?i)endcomponent\n|(?i)endempty\n|(?i)endfor\n|(?i)endforeach\n|(?i)endforelse\n|(?i)endguest\n|(?i)endif\n|(?i)endisset\n|(?i)endlang\n|(?i)endprepend\n|(?i)endpush\n|(?i)endsection\n|(?i)endslot\n|(?i)endswitch\n|(?i)endunless\n|endverbatim\n|(?i)endwhile\n|(?i)guest\n|(?i)lang\n|(?i)overwrite\n|(?i)parent\n|(?i)show\n|(?i)stop\n|(?i)endtask\n|(?i)endstory\n|(?i)finished\n|(?i)endfinished\n|(?i)verbatim\n|(?i)csrf\n)\n\\b",
           "name": "keyword.blade"
         },
         {
-          "begin": "(?<![A-Za-z0-9_@])@(?i:php|setup)\\b",
-          "end": "(?<![A-Za-z0-9_@])(?=@(?i:endphp|endsetup)\\b)",
+          "begin": "((?<![A-Za-z0-9_@])@(?i:php|setup)\\b)",
           "beginCaptures": {
             "0": {
               "name": "punctuation.section.embedded.begin.php"
-            }
-          },
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.end.php"
+            },
+            "1": {
+              "name": "keyword.blade"
             }
           },
           "contentName": "source.php",
+          "end": "((?<![A-Za-z0-9_@])@(?i:endphp|endsetup)\\b)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.end.php"
+            },
+            "1": {
+              "name": "keyword.blade"
+            }
+          },
           "name": "meta.embedded.block.blade",
           "patterns": [
             {
               "include": "#language"
             }
           ]
-        },
-        {
-          "begin": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n(\n  @\n  (?i:\n    endphp|endsetup\n  )\n  [\\t ]* # Whitespace between name and parentheses\n)\n(\\() # Followed by opening parentheses",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.section.embedded.end.php"
-            },
-            "2": {
-              "name": "begin.bracket.round.blade.php"
-            }
-          },
-          "contentName": "comment.blade",
-          "end": "\\)",
-          "endCaptures": {
-            "0": {
-              "name": "end.bracket.round.blade.php"
-            }
-          },
-          "name": "meta.directive.blade",
-          "patterns": [
-            {
-              "include": "#balance_brackets"
-            }
-          ]
-        },
-        {
-          "match": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n@\n(?: # Ordering not important as we everything will be matched up to word boundary\n (?i)endphp|endsetup\n)\n\\b",
-          "name": "punctuation.section.embedded.end.php"
         },
         {
           "begin": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n(\n  @\n  \\w+(?:::w+)? # Any number/letter sequence, can also be postfixed by ::someOtherString\n  [\\t ]* # Whitespace between name and parentheses\n)\n(\\() # Followed by opening parentheses",
@@ -366,10 +344,6 @@
               "include": "#language"
             }
           ]
-        },
-        {
-          "match": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n@\n\\w+(?:::w+)? # Any number/letter sequence, can also be postfixed by ::someOtherString\n\\b # Bounded by word boundary",
-          "name": "entity.name.function.blade"
         },
         {
           "begin": "(^\\s*)(?=<\\?(?![^?]*\\?>))",
